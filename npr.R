@@ -12,7 +12,7 @@ for (d in datez) {
   npr <- fromJSON(read_html(api_link) %>% html_text())$list$story
   
   for (j in 1:length(npr)) { 
-    if (!(npr[[j]]$id %in% idz) & nchar(npr[[j]]$fullText) > 0 ) {
+    if (!(npr[[j]]$id %in% idz) & "fullText" %in% names(npr[[j]]) ) {
       iterator <- iterator + 1
       articlez[iterator]<-npr[[j]]$fullText
       idz[iterator] <- npr[[j]]$id
