@@ -1,9 +1,11 @@
 library(rvest)
 library(rjson)
-datez <- as.character(seq(as.Date("2015/6/16"), as.Date("2015/8/15"), "weeks"))
+library(stringr)
+datez <- as.character(seq(as.Date("2015/6/10"), as.Date("2015/10/20"), "weeks"))
 articlez <- character(300)
 idz <- numeric(300)
 pubdatez <- character(300)
+titlez <- character(300)
 iterator <- 0
 
 for (d in datez) {
@@ -17,7 +19,11 @@ for (d in datez) {
       articlez[iterator]<-npr[[j]]$fullText
       idz[iterator] <- npr[[j]]$id
       pubdatez[iterator] <- npr[[j]]$storyDate
+      titlez[iterator] <- npr[[j]]$title
     }
   }
 }
 
+tempdf <- data.frame(cbind(idz[1:193],word(unlist(pubdatez[1:193]),2,4)))
+tempdf$X2 <- as.Date(tempdf$X2,"%d %b %Y")
+tempdf <- data.frame(cbind(tempdf,titlez=as.character(titlez[1:193])))
