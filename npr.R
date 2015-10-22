@@ -27,3 +27,7 @@ for (d in datez) {
 tempdf <- data.frame(cbind(idz[1:193],word(unlist(pubdatez[1:193]),2,4)))
 tempdf$X2 <- as.Date(tempdf$X2,"%d %b %Y")
 tempdf <- data.frame(cbind(tempdf,titlez=as.character(titlez[1:193])))
+tempdf$trump_in_title <- grepl("[Tt]rump",tempdf$titlez)
+
+plot(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(sum(x))}),pch=20)
+lines(lowess(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(sum(x))})),col="blue",lwd=2)
