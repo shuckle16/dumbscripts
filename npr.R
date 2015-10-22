@@ -1,6 +1,6 @@
 library(rvest)
 library(rjson)
-datez <- as.character(seq(as.Date("2015/6/16"), as.Date("2015/7/15"), "days"))
+datez <- as.character(seq(as.Date("2015/6/16"), as.Date("2015/8/15"), "weeks"))
 articlez <- character(300)
 idz <- numeric(300)
 pubdatez <- character(300)
