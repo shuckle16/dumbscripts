@@ -52,6 +52,8 @@ for (i in 1:100) {
 mydf2 <- as.data.frame(cbind(dts,titles,urls))
 
 mydf3 <- rbind(mydf,mydf2)
+mydf3$trump_in_title <- grepl("[Tt]rump",mydf3$titles)
+mydf3$dts <- as.Date(substr(mydf3$dts,1,10))
 
 
 # note did not get enough stuff from august 25 - 27
