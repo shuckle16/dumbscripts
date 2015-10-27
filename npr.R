@@ -24,9 +24,11 @@ for (d in datez) {
   }
 }
 
-tempdf <- data.frame(cbind(idz[1:202],word(unlist(pubdatez[1:202]),2,4)))
+legit_articles <- which(nchar(articlez) == 0)[1]-1
+
+tempdf <- data.frame(cbind(idz[1:legit_articles],word(unlist(pubdatez[1:legit_articles]),2,4)))
 tempdf$X2 <- as.Date(tempdf$X2,"%d %b %Y")
-tempdf <- data.frame(cbind(tempdf,titlez=as.character(titlez[1:202])))
+tempdf <- data.frame(cbind(tempdf,titlez=as.character(titlez[1:legit_articles])))
 tempdf$trump_in_title <- grepl("[Tt]rump",tempdf$titlez)
 
 plot(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(sum(x))}),pch=20)
