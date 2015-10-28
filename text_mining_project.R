@@ -58,8 +58,8 @@ mydf3$dts <- as.Date(substr(mydf3$dts,1,10))
 
 # note did not get enough stuff from august 25 - 27
 
-
-
+# filter out videos
+mydf3 <- mydf3[-grep("video",mydf$urls),]
 
 
 # getting the text 
