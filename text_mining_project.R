@@ -8,6 +8,7 @@ dts <- character(1000)
 urls <- character(1000)
 titles <- character(1000)
 
+# loop through 100 pages from june 15
 for (i in 1:100) {
 
   uri <- paste("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=donald+trump&begin_date=20150615&sort=oldest&page=",
@@ -32,6 +33,8 @@ dts <- character(1000)
 urls <- character(1000)
 titles <- character(1000)
 
+
+# loop backwards through 100 pages from today
 for (i in 1:100) {
   
   uri <- paste("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=donald+trump&begin_date=20150615&sort=newest&page=",
