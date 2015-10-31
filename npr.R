@@ -1,12 +1,14 @@
 library(rvest)
 library(rjson)
 library(stringr)
-datez <- as.character(seq(as.Date("2015/6/10"), as.Date("2015/10/20"), "weeks"))
-articlez <- character(300)
-idz <- numeric(300)
-pubdatez <- character(300)
-titlez <- character(300)
+
 iterator <- 0
+datez    <- as.character(seq(as.Date("2015/6/10"), as.Date("2015/10/20"), "weeks"))
+
+idz      <- numeric(300)
+articlez <- character(300)
+pubdatez <- character(300)
+titlez   <- character(300)
 
 for (d in datez) {
   api_link <- paste("http://api.npr.org/query?startDate=",d,"&searchTerm=donald%20trump&dateType=story&sort=dateAsc&numResults=50&output=JSON&apiKey=MDIwNDU5NzMyMDE0NDIwODE2NzNkOWE0OA001",sep="")
