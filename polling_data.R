@@ -15,14 +15,15 @@ names(weekly_counts) <- c("week","trump_in_title")
 weekly_polls <- aggregate(polls$Trump~polls$week,FUN=median)
 names(weekly_polls) <- c("week","trump_poll")
 
-plot(weekly_polls,pch=20,cex=.4,main="Trump's Polling Average", xlab="week of 2015",ylab="Polling Percentage (median)")
+plot(weekly_polls,pch=20,cex=.4,main="Trump's Polling Average", 
+                  xlab="week of 2015",ylab="Polling Percentage (median)")
 points(weekly_counts,pch=20,cex=.4,col="blue")
 
 
 lines(weekly_polls,lwd=1,lty=2)
 lines(weekly_counts,lwd=1,lty=2,col="blue")
 
-lines(lowess(weekly_polls),col="black",lwd=3)
+lines(lowess(weekly_polls),lwd=3,col="black")
 lines(lowess(weekly_counts),lwd=3,col="blue")
 
 
