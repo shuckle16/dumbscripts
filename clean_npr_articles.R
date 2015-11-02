@@ -3,8 +3,12 @@
 library(stringr)
 library(tm)
 
-articlez <- str_replace(string = articlez,
-                        pattern = "Copyright 2015 NPR. To see more, visit http://www.npr.org/.",
+articlez <- str_replace(string      = articlez,
+                        pattern     = "Copyright 2015 NPR. To see more, visit http://www.npr.org/.",
+                        replacement = "")
+
+articlez <- str_replace(string      = articlez,
+                        pattern     = "(f|ht)(tp)(s?)(://)(.*)[.][a-z]{2,6}", 
                         replacement = "")
 
 articlez <- str_to_lower(articlez)
