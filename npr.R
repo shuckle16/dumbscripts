@@ -3,7 +3,7 @@ library(rjson)
 library(stringr)
 
 iterator <- 0
-datez    <- as.character(seq(as.Date("2015/6/10"), as.Date("2015/10/20"), "weeks"))
+datez    <- as.character(seq(as.Date("2015/6/10"),Sys.Date(), "weeks"))
 
 idz      <- numeric(300)
 articlez <- character(300)
