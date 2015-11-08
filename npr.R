@@ -35,3 +35,9 @@ tempdf$trump_in_title <- grepl("[Tt]rump",tempdf$titlez)
 
 plot(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(sum(x))}),pch=20)
 lines(lowess(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(sum(x))})),col="red",lwd=2)
+
+
+tempdf$week <- format(tempdf$X2,"%U")
+
+plot(aggregate(tempdf$X1~tempdf$week,FUN=length),type="l")
+
