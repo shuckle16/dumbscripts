@@ -1,7 +1,7 @@
 library(stringr)
 library(dplyr)
 polls <- read.csv("~/bzan/3/tm/project/polling_data.csv")
-polls <- polls[,1:3]
+polls <- polls[,c(1,2,4)]
 
 polls$Trump <- as.numeric(as.character(polls$Trump))
 polls$Date <- as.Date(paste(word(polls[,2],3),"/2015",sep=""),"%m/%d/%Y")
@@ -16,7 +16,7 @@ weekly_polls <- aggregate(polls$Trump~polls$week,FUN=median)
 names(weekly_polls) <- c("week","trump_poll")
 
 plot(weekly_polls,pch=20,cex=.4,main="Trump's Polling Average", 
-                  xlab="week of 2015",ylab="Polling Percentage (median)")
+     xlab="week of 2015",ylab="Polling Percentage (median)")
 points(weekly_counts,pch=20,cex=.4,col="blue")
 
 
@@ -34,3 +34,9 @@ cor(newdf$trump_poll,newdf$trump_in_title)
 #install.packages("MSBVAR")
 library(MSBVAR)
 granger.test(newdf[2:3],1)
+
+
+
+trump <- inner_join(trump_mentions,newdf)
+
+granger.test(trump[,2:3],1)
