@@ -39,5 +39,9 @@ lines(lowess(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(su
 
 tempdf$week <- format(tempdf$X2,"%U")
 
-plot(aggregate(tempdf$X1~tempdf$week,FUN=length),type="l")
+trump_mentions <- aggregate(tempdf$X1~tempdf$week,FUN=length)
+names(trump_mentions) <- c("week","mentions")
+
+plot(trump_mentions,type="l")
+
 
