@@ -98,3 +98,16 @@ trump$sentiment_score > 0
 
 plot(trump$trump_poll~trump$week,type="l",ylim=c(-5,40))
 lines(100*trump$sentiment_score~trump$week)
+
+
+
+
+
+
+table(afinn_list[match(unlist(str_split(articlez[which(tempdf$trump_in_title)][1],"\\s+")),afinn_list[,1]),2])
+
+sents <- numeric(82)
+for (i in 1:82) {
+sents[i] <- sum(as.numeric(rownames(table(afinn_list[match(unlist(str_split(articlez[which(tempdf$trump_in_title)][i],"\\s+")),afinn_list[,1]),2]))) * table(afinn_list[match(unlist(str_split(articlez[which(tempdf$trump_in_title)][i],"\\s+")),afinn_list[,1]),2]))
+}
+plot(sents,type="l")
