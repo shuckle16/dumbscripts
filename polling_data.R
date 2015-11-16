@@ -1,7 +1,7 @@
 library(stringr)
 library(dplyr)
 polls <- read.csv("~/bzan/3/tm/project/polling_data.csv")
-polls <- polls[,c(1,2,4)]
+polls <- polls[,c(1,2,grep(names(polls),pattern = "[Tt]rump"))]
 
 polls$Trump <- as.numeric(as.character(polls$Trump))
 polls$Date <- as.Date(paste(word(polls[,2],3),"/2015",sep=""),"%m/%d/%Y")
@@ -34,7 +34,6 @@ cor(newdf$trump_poll,newdf$trump_in_title)
 #install.packages("MSBVAR")
 library(MSBVAR)
 granger.test(newdf[2:3],1)
-
 
 
 trump <- inner_join(trump_mentions,newdf)
