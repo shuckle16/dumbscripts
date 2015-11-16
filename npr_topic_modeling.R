@@ -1,5 +1,7 @@
 # topic modeling
 
+library(topicmodels)
+
 topics <- LDA(DocumentTermMatrix(VCorpus(VectorSource(articlez[1:legit_articles]))),5)
 
 get_terms(topics,10)
