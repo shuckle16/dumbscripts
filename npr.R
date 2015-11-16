@@ -26,22 +26,22 @@ for (d in datez) {
   }
 }
 
+# build data frame of titles
+
 legit_articles <- which(nchar(articlez) == 0)[1]-1
 
-tempdf <- data.frame(cbind(idz[1:legit_articles],word(unlist(pubdatez[1:legit_articles]),2,4)))
-tempdf$X2 <- as.Date(tempdf$X2,"%d %b %Y")
-tempdf <- data.frame(cbind(tempdf,titlez=as.character(titlez[1:legit_articles])))
-tempdf$trump_in_title <- grepl("[Tt]rump",tempdf$titlez)
 
-plot(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(sum(x))}),pch=20)
-lines(lowess(aggregate(tempdf$trump_in_title~tempdf$X2,FUN=function(x){return(sum(x))})),col="red",lwd=2)
+title_df <- data.frame(idz   = idz[1:legit_articles],
+                       date  = as.Date(word(unlist(pubdatez[1:legit_articles]),2,4),"%d %b %Y"),
+                       title = as.character(titlez[1:legit_articles]))
+
+title_df$trump_in_title <- grepl("[Tt]rump",title_df$title)
+
+title_df$week <- format(title_df$date,"%U")
 
 
-tempdf$week <- format(tempdf$X2,"%U")
-
-trump_mentions <- aggregate(tempdf$X1~tempdf$week,FUN=length)
+trump_mentions <- aggregate(title_df$idz~title_df$week,FUN=length)
 names(trump_mentions) <- c("week","mentions")
 
 plot(trump_mentions,type="l")
-
-
+lines(lowess(trump_mentions),col="red",lwd=2)
