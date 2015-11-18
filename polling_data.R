@@ -2,6 +2,7 @@ library(stringr)
 library(dplyr)
 
 polls <- read.csv("~/bzan/3/tm/project/polling_data.csv")
+#polls <- read.csv("http://elections.huffingtonpost.com/pollster/2016-national-gop-primary.csv")
 polls <- polls[,c(1,2,grep(names(polls),pattern = "[Tt]rump"))]
 
 polls$Trump <- as.numeric(as.character(polls$Trump))
