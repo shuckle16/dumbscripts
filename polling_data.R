@@ -1,19 +1,24 @@
 library(stringr)
 library(dplyr)
 
-polls <- read.csv("~/bzan/3/tm/project/polling_data.csv")
-#polls <- read.csv("http://elections.huffingtonpost.com/pollster/2016-national-gop-primary.csv")
-polls <- polls[,c(1,2,grep(names(polls),pattern = "[Tt]rump"))]
+polls_real_clear <- read.csv("~/bzan/3/tm/project/polling_data.csv")
+polls_real_clear <- polls_real_clear[,c(1,2,grep(names(polls_real_clear),pattern = "[Tt]rump"))]
+polls_real_clear$Date <- as.Date(paste(word(polls_real_clear[,2],3),"/2015",sep=""),"%m/%d/%Y")
+polls_real_clear$Trump <- as.numeric(as.character(polls_real_clear$Trump))
+polls_real_clear$week <- format.Date(polls_real_clear$Date,"%U")
+
+polls <- read.csv("http://elections.huffingtonpost.com/pollster/2016-national-gop-primary.csv")
+polls <- polls[,c(1,3,grep(names(polls),pattern = "[Tt]rump"))]
 
 polls$Trump <- as.numeric(as.character(polls$Trump))
-polls$Date <- as.Date(paste(word(polls[,2],3),"/2015",sep=""),"%m/%d/%Y")
+polls$Date <- as.Date(polls$End.Date)
 polls$week <- format.Date(polls$Date,"%U")
 
 
 weekly_counts <- aggregate(title_df$trump_in_title~title_df$week,FUN=sum)
 names(weekly_counts) <- c("week","trump_in_title")
 
-weekly_polls <- aggregate(polls$Trump~polls$week,FUN=median)
+weekly_polls <- aggregate(polls_real_clear$Trump~polls_real_clear$week,FUN=median)
 names(weekly_polls) <- c("week","trump_poll")
 
 plot(weekly_polls,pch=20,cex=.4,main="Trump's Polling Average", 
