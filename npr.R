@@ -40,8 +40,9 @@ title_df <- data.frame(idz   = idz[1:legit_articles],
                        title = as.character(titlez[1:legit_articles]))
 
 title_df$candidate_in_title <- grepl(candidate,title_df$title,ignore.case = TRUE)
-
 title_df$week <- format(title_df$date,"%U")
+
+# clean articlez, then make article_df
 
 
 candidate_mentions <- aggregate(title_df$idz~title_df$week,FUN=length)
