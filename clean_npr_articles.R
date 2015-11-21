@@ -3,6 +3,8 @@
 library(stringr)
 library(tm)
 
+articlez <- articlez[1:legit_articlez]
+
 articlez <- str_replace(string      = articlez,
                         pattern     = "Copyright 2015 NPR. To see more, visit http://www.npr.org/.",
                         replacement = "")
