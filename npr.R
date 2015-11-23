@@ -39,10 +39,12 @@ title_df <- data.frame(idz   = idz[1:legit_articles],
                        date  = as.Date(word(unlist(pubdatez[1:legit_articles]),2,4),"%d %b %Y"),
                        title = as.character(titlez[1:legit_articles]))
 
-title_df$candidate_in_title <- grepl(candidate,title_df$title,ignore.case = TRUE)
-title_df$week <- format(title_df$date,"%U")
 
-# clean articlez, then make article_df
+# if full name or last name is in the title
+
+title_df$candidate_in_title <- grepl(candidate,title_df$title,ignore.case = TRUE) | grepl(lname,title_df$title,ignore.case=TRUE)
+
+title_df$week <- format(title_df$date,"%U")
 
 
 candidate_mentions <- aggregate(title_df$idz~title_df$week,FUN=length)
