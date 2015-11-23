@@ -3,12 +3,15 @@ setwd("~/bzan/3/tm/project/")
 afinn_list <- read.delim(file='AFINN/AFINN-111.txt', header=FALSE, stringsAsFactors=FALSE)
 names(afinn_list) <- c('word', 'score')
 
+articles_about_candidate <-articlez[which(title_df$candidate_in_title)]
 
-table(afinn_list[match(unlist(str_split(articlez[which(title_df$candidate_in_title)][1],"\\s+")),afinn_list[,1]),2])
-
-sents <- numeric(83)
-for (i in 1:83) {
-  sents[i] <- sum(as.numeric(rownames(table(afinn_list[match(unlist(str_split(articlez[which(title_df$candidate_in_title)][i],"\\s+")),afinn_list[,1]),2]))) * table(afinn_list[match(unlist(str_split(articlez[which(title_df$candidate_in_title)][i],"\\s+")),afinn_list[,1]),2]))
+sents <- numeric(length(articles_about_candidate))
+for (i in 1:length(sents)) {
+  words_in_article <- unlist(str_split(articles_about_candidate[i],"\\s+"))
+  matches <- match(words_in_article,afinn_list[,1])
+  tbl <- table(afinn_list[matches,2])
+  
+  sents[i] <- sum(as.numeric(rownames(tbl))*tbl)
 }
 plot(sents,type="l")
 
@@ -18,4 +21,6 @@ sents_df <- data.frame(title_df[which(title_df$candidate_in_title),],sents)
 weekly_sents <- aggregate(sents_df$sents~sents_df$week,FUN=median)
 names(weekly_sents) <- c("week","sent")
 
-granger.test(test_sent[,c(2,4)],1)
+candidate_df <- inner_join(candidate_df,weekly_sents)
+
+granger.test(candidate_df[,c(3,5)],1)
