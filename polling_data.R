@@ -42,5 +42,7 @@ candidate_df <- inner_join(candidate_mentions,candidate_df)
 
 # granger tests 
 library(MSBVAR)
-granger.test(candidate_df[2:3],1)
-granger.test(candidate_df[3:4],2)
+pim <- granger.test(candidate_df[2:3],1)[1,2]
+mip <- granger.test(candidate_df[2:3],1)[2,2]
+
+#granger.test(candidate_df[3:4],2)
