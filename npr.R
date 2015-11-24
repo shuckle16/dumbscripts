@@ -51,3 +51,9 @@ names(candidate_mentions) <- c("week","mentions")
 plot(candidate_mentions,type="l",main=paste(lname,"'s mentions in NPR articles",sep=""))
 lines(lowess(candidate_mentions),col="red",lwd=2)
 
+
+# data for final republican_df
+t_m <- nrow(title_df)
+mit <- length(which(title_df$candidate_in_title))
+
+
