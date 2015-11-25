@@ -1,10 +1,13 @@
 library(rvest)
 library(rjson)
 library(stringr)
+library(tm)
 
 #candidate <- "donald trump"
 fname <- word(candidate,1)
 lname <- word(candidate,2)
+
+cand_file_name <- str_replace(candidate," ","")
 
 iterator <- 0
 datez    <- as.character(seq(as.Date("2015/6/10"),Sys.Date(), "weeks"))
@@ -55,5 +58,4 @@ lines(lowess(candidate_mentions),col="red",lwd=2)
 # data for final republican_df
 t_m <- nrow(title_df)
 mit <- length(which(title_df$candidate_in_title))
-
 

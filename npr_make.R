@@ -10,15 +10,17 @@ republican_df <- data.frame(name                   =character(),
                             mentions_implies_polls =numeric(),
                             polls_implies_mentions =numeric(),
                             total_mentions         =numeric(),
-                            mentions_in_titles     =numeric())
+                            mentions_in_titles     =numeric(),
+                            min_sent               =numeric(),
+                            max_sent               =numeric())
 
 for (candidate in republicans) {
   print(candidate)
   source("npr.R")
   source("polling_data.R")
   #source("testing.R")
-  #source("clean_npr_articles.R")
-  #source("sentiment_analysis_stuff.R")
+  source("clean_npr_articles.R")
+  source("sentiment_analysis_stuff.R")
   
   # to do 
   # save p-values from granger test to a dataframe
@@ -28,7 +30,8 @@ for (candidate in republicans) {
                         mentions_implies_polls = mip,
                         polls_implies_mentions = pim,
                         total_mentions         = t_m,
-                        mentions_in_titles     = mit)
+                        mentions_in_titles     = mit,
+                        minsent                =)
   
   republican_df <- rbind(republican_df,new_row)
   
