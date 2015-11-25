@@ -2,7 +2,7 @@ library(rvest)
 library(rjson)
 library(stringr)
 
-candidate <- "donald trump"
+#candidate <- "donald trump"
 fname <- word(candidate,1)
 lname <- word(candidate,2)
 

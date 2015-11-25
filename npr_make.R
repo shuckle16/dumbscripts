@@ -13,10 +13,12 @@ republican_df <- data.frame(name                   =character(),
                             mentions_in_titles     =numeric())
 
 for (candidate in republicans) {
+  print(candidate)
   source("npr.R")
   source("polling_data.R")
-  source("clean_npr_articles.R")
-  source("sentiment_analysis_stuff.R")
+  #source("testing.R")
+  #source("clean_npr_articles.R")
+  #source("sentiment_analysis_stuff.R")
   
   # to do 
   # save p-values from granger test to a dataframe
