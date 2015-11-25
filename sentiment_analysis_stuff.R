@@ -1,4 +1,4 @@
-setwd("~/bzan/3/tm/project/")
+# sentiment analysis
 
 afinn_list <- read.delim(file='AFINN/AFINN-111.txt', header=FALSE, stringsAsFactors=FALSE)
 names(afinn_list) <- c('word', 'score')
@@ -21,7 +21,7 @@ sents_df <- data.frame(title_df[which(title_df$candidate_in_title),],sents)
 weekly_sents <- aggregate(sents_df$sents~sents_df$week,FUN=median)
 names(weekly_sents) <- c("week","sent")
 
-candidate_df <- inner_join(candidate_df,weekly_sents)
+candidate_df <- left_join(candidate_df,weekly_sents)
 
 granger.test(candidate_df[,c(3,5)],1)
 
