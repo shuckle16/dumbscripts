@@ -3,7 +3,7 @@
 republicans <- c("donald trump", "ben carson", "carly fiorina",
                  "marco rubio", "jeb bush", "ted cruz",
                  "rand paul", "john kasich", "mike huckabee",
-                 "chris christie", "rick santorum", "lindsey graham", "george pataki")
+                 "chris christie") #, "rick santorum", "lindsey graham", "george pataki")
 
 
 republican_df <- data.frame(name                   =character(),
@@ -31,7 +31,8 @@ for (candidate in republicans) {
                         polls_implies_mentions = pim,
                         total_mentions         = t_m,
                         mentions_in_titles     = mit,
-                        minsent                =)
+                        min_sent               = minsent,
+                        max_sent               = maxsent)
   
   republican_df <- rbind(republican_df,new_row)
   

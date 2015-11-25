@@ -26,7 +26,7 @@ candidate_df <- left_join(candidate_df,weekly_sents)
 minsent <- min(candidate_df$sent,na.rm=TRUE)
 maxsent <- max(candidate_df$sent,na.rm=TRUE)
 
-granger.test(candidate_df[,c(3,5)],1)
+#granger.test(candidate_df[,c(3,5)],1)
 
 plot_range <- range(rbind(candidate_df$candidate_poll,candidate_df$sent),na.rm=TRUE)
 
