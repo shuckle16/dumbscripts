@@ -25,16 +25,13 @@ names(weekly_polls) <- c("week","candidate_poll")
 
 plot(weekly_polls,pch=20,cex=.4,main=paste(lname,"'s Polling Average",sep=""), 
      xlab="week of 2015",ylab="Polling Percentage (median)",ylim=c(0,max(weekly_polls[,2])))
-#points(weekly_counts,pch=20,cex=.4,col="blue")
 points(candidate_mentions,pch=20,cex=.4,col="blue")
 
 
 lines(weekly_polls,lwd=1,lty=2)
-#lines(weekly_counts,lwd=1,lty=2,col="blue")
 lines(candidate_mentions,lwd=1,lty=2,col="blue")
 
 lines(lowess(weekly_polls),lwd=3,col="black")
-#lines(lowess(weekly_counts),lwd=3,col="blue")
 lines(lowess(candidate_mentions),lwd=3,col="blue")
 
 candidate_df <- inner_join(weekly_polls,weekly_counts)
@@ -44,5 +41,3 @@ candidate_df <- inner_join(candidate_mentions,candidate_df)
 library(MSBVAR)
 pim <- granger.test(candidate_df[2:3],1)[1,2]
 mip <- granger.test(candidate_df[2:3],1)[2,2]
-
-#granger.test(candidate_df[3:4],2)
