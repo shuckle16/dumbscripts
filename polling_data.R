@@ -1,7 +1,7 @@
 library(stringr)
 library(dplyr)
 
-polls_real_clear <- read.csv("~/bzan/3/tm/project/polling_data.csv")
+polls_real_clear <- read.csv("polling_data.csv")
 polls_real_clear <- polls_real_clear[,c(1,2,grep(names(polls_real_clear),pattern = lname,ignore.case = TRUE))]
 polls_real_clear$Date <- as.Date(paste(word(polls_real_clear[,2],3),"/2015",sep=""),"%m/%d/%Y")
 names(polls_real_clear) <- c("Poll","Date","candidate")
