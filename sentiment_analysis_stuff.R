@@ -25,10 +25,14 @@ candidate_df <- left_join(candidate_df,weekly_sents)
 
 granger.test(candidate_df[,c(3,5)],1)
 
+plot_range <- range(rbind(candidate_df$candidate_poll,candidate_df$sent),na.rm=TRUE)
+
 png(paste(candidate,".png",sep=""),width = 800, height= 547 )
-plot(candidate_poll~week,data=candidate_df,type="l",ylim=c(-25,45),lwd=2
+plot(candidate_poll~week,data=candidate_df,type="l",ylim=plot_range,lwd=2
      ,main=paste(candidate,"'s poll numbers,mentions,and sentiments",sep=""))
 lines(mentions~week,data=candidate_df,col="blue")
 lines(sent~week,data=candidate_df,col="darkgreen")
+legend("bottomright",c("polls","mentions","sentiment score"),col=c("black","blue","green"),lty=1)
+
 dev.off()
 
