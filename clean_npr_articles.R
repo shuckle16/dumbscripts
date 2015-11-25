@@ -24,3 +24,6 @@ articlez <- removeNumbers(articlez)
 articlez <- removePunctuation(articlez)
 
 cleaned_corp <- VCorpus(VectorSource(articlez))
+path <- paste("articles/clean/",cand_file_name,sep="")
+dir.create(file.path(path), showWarnings = FALSE)
+writeCorpus(cleaned_corp,path=path)
