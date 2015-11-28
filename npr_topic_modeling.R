@@ -2,7 +2,7 @@
 
 library(topicmodels)
 
-topics <- LDA(DocumentTermMatrix(VCorpus(VectorSource(articlez))),5)
+topics <- LDA(DocumentTermMatrix(VCorpus(VectorSource(articlez))),6)
 
 get_terms(topics,10)
 
