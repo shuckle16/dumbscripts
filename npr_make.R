@@ -37,3 +37,5 @@ for (candidate in republicans) {
   republican_df <- rbind(republican_df,new_row)
   
 }
+
+write.csv(x = republican_df,file="rep.csv")

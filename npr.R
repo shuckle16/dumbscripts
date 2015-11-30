@@ -10,7 +10,7 @@ lname <- word(candidate,2)
 cand_file_name <- str_replace(candidate," ","")
 
 iterator <- 0
-datez    <- as.character(seq(as.Date("2015/6/10"),Sys.Date()-1, "weeks"))
+datez    <- as.character(seq(as.Date("2015/6/10"),as.Date("2015/11/15"), "weeks"))
 
 idz      <- numeric(300)
 articlez <- character(300)
