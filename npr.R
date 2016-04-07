@@ -2,15 +2,16 @@ library(rvest)
 library(rjson)
 library(stringr)
 library(tm)
+library(lubridate)
 
-#candidate <- "donald trump"
+candidate <- "donald trump"
 fname <- word(candidate,1)
 lname <- word(candidate,2)
 
 cand_file_name <- str_replace(candidate," ","")
 
 iterator <- 0
-datez    <- as.character(seq(as.Date("2015/6/10"),as.Date("2015/11/15"), "weeks"))
+datez    <- as.character(seq(as.Date("2015/6/10"),as.Date(Sys.Date()), "weeks"))
 
 idz      <- numeric(300)
 articlez <- character(300)
@@ -43,12 +44,13 @@ title_df <- data.frame(idz   = idz[1:legit_articles],
                        title = as.character(titlez[1:legit_articles]))
 
 title_df$week <- format(title_df$date,"%U")
+title_df$week <- as.numeric(title_df$week) + 52*(year(title_df$date) - 2015)
 
 # if full name or last name is in the title
 title_df$candidate_in_title <- grepl(candidate,title_df$title,ignore.case = TRUE) | grepl(lname,title_df$title,ignore.case=TRUE)
 
 
-candidate_mentions <- aggregate(title_df$idz~title_df$week,FUN=length)
+candidate_mentions <- aggregate(title_df$idz~as.Date(paste(year(title_df$date),month(title_df$date),"01"),"%Y %m %d"),FUN=length)
 names(candidate_mentions) <- c("week","mentions")
 
 plot(candidate_mentions,type="l",main=paste(lname,"'s mentions in NPR articles",sep=""))
