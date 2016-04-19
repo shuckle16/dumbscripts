@@ -10,7 +10,7 @@ polls_real_clear$candidate <- as.numeric(as.character(polls_real_clear$candidate
 polls_real_clear$week <- format.Date(polls_real_clear$Date,"%U")
 
 polls <- read.csv("http://elections.huffingtonpost.com/pollster/2016-national-gop-primary.csv")
-polls <- polls[,c(1,3,grep(names(polls),pattern = "[Tt]rump"))]
+polls <- polls[,c(1,3,grep(names(polls),pattern = lname,ignore.case=TRUE))]
 
 polls$Trump <- as.numeric(as.character(polls$Trump))
 polls$Date <- as.Date(polls$End.Date)
