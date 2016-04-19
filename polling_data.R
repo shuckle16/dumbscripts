@@ -1,10 +1,10 @@
 library(stringr)
 library(dplyr)
 
-polls_real_clear <- read.csv("polling_data.csv")
-polls_real_clear <- polls_real_clear[,c(1,2,grep(names(polls_real_clear),pattern = lname,ignore.case = TRUE))]
-polls_real_clear$Date <- as.Date(paste(word(polls_real_clear[,2],3),"/2015",sep=""),"%m/%d/%Y")
-names(polls_real_clear) <- c("Poll","Date","candidate")
+#polls_real_clear <- read.csv("polling_data.csv")
+#polls_real_clear <- polls_real_clear[,c(1,2,grep(names(polls_real_clear),pattern = lname,ignore.case = TRUE))]
+#polls_real_clear$Date <- as.Date(paste(word(polls_real_clear[,2],3),"/2015",sep=""),"%m/%d/%Y")
+#names(polls_real_clear) <- c("Poll","Date","candidate")
 
 polls_real_clear$candidate <- as.numeric(as.character(polls_real_clear$candidate))
 polls_real_clear$week <- format.Date(polls_real_clear$Date,"%U")
@@ -12,7 +12,7 @@ polls_real_clear$week <- format.Date(polls_real_clear$Date,"%U")
 polls <- read.csv("http://elections.huffingtonpost.com/pollster/2016-national-gop-primary.csv")
 polls <- polls[,c(1,3,grep(names(polls),pattern = lname,ignore.case=TRUE))]
 
-polls$Trump <- as.numeric(as.character(polls$Trump))
+polls[,3] <- as.numeric(as.character(polls[,3]))
 polls$Date <- as.Date(polls$End.Date)
 polls$week <- format.Date(polls$Date,"%U")
 
