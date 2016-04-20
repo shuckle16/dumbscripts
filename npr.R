@@ -4,7 +4,7 @@ library(stringr)
 library(tm)
 library(lubridate)
 
-candidate <- "donald trump"
+candidate <- "john kasich"
 fname <- word(candidate,1)
 lname <- word(candidate,2)
 
@@ -52,6 +52,7 @@ title_df$candidate_in_title <- grepl(candidate,title_df$title,ignore.case = TRUE
 
 candidate_mentions <- aggregate(title_df$idz~as.Date(paste(year(title_df$date),month(title_df$date),"01"),"%Y %m %d"),FUN=length)
 names(candidate_mentions) <- c("week","mentions")
+candidate_mentions$week <- as.numeric(format(candidate_mentions$week,"%U")) + 52*(year(candidate_mentions$week) - 2015)
 
 plot(candidate_mentions,type="l",main=paste(lname,"'s mentions in NPR articles",sep=""))
 lines(lowess(candidate_mentions),col="red",lwd=2)
