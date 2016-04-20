@@ -6,8 +6,8 @@ library(dplyr)
 #polls_real_clear$Date <- as.Date(paste(word(polls_real_clear[,2],3),"/2015",sep=""),"%m/%d/%Y")
 #names(polls_real_clear) <- c("Poll","Date","candidate")
 
-polls_real_clear$candidate <- as.numeric(as.character(polls_real_clear$candidate))
-polls_real_clear$week <- format.Date(polls_real_clear$Date,"%U")
+#polls_real_clear$candidate <- as.numeric(as.character(polls_real_clear$candidate))
+#polls_real_clear$week <- format.Date(polls_real_clear$Date,"%U")
 
 polls <- read.csv("http://elections.huffingtonpost.com/pollster/2016-national-gop-primary.csv")
 polls <- polls[,c(1,3,grep(names(polls),pattern = lname,ignore.case=TRUE))]
@@ -16,11 +16,12 @@ polls[,3] <- as.numeric(as.character(polls[,3]))
 polls$Date <- as.Date(polls$End.Date)
 polls$week <- format.Date(polls$Date,"%U")
 
+polls$week <- as.numeric(polls$week) + 52*(year(polls$Date) - 2015)
 
 weekly_counts <- aggregate(title_df$candidate_in_title~title_df$week,FUN=sum)
 names(weekly_counts) <- c("week","candidate_in_title")
 
-weekly_polls <- aggregate(polls_real_clear$candidate~polls_real_clear$week,FUN=median)
+weekly_polls <- aggregate(polls[,3]~polls$week,FUN=median)
 names(weekly_polls) <- c("week","candidate_poll")
 
 plot(weekly_polls,pch=20,cex=.4,main=paste(lname,"'s Polling Average",sep=""), 
