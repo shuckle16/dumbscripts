@@ -49,12 +49,14 @@ get_text_npr <- function(candidate="donald trump",api_key="your_api_key") {
   article_df
 }
 
-get_polls_huffpost <- function(candidate=lname,party="gop") {
+get_polls_huffpost <- function(candidate="trump",party="gop") {
   polls <- read.csv(paste("http://elections.huffingtonpost.com/pollster/2016-national-",party,"-primary.csv",sep=""),stringsAsFactors = FALSE)
-  polls <- polls[,c(1,3,grep(names(polls),pattern = lname,ignore.case=TRUE))]
+  polls <- polls[,c(1,3,grep(names(polls),pattern = candidate,ignore.case=TRUE))]
   
   polls$End.Date <- as.Date(polls$End.Date)
   names(polls) <- c("pollster","date","pct_vote")
   
   polls
 }
+
+
