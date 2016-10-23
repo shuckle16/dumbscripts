@@ -4,7 +4,6 @@ library(stringr)
 library(tm)
 library(lubridate)
 
-
 get_text_npr <- function(candidate="donald trump",api_key="your_api_key") {
   
   fname <- word(candidate,1)
@@ -36,15 +35,14 @@ get_text_npr <- function(candidate="donald trump",api_key="your_api_key") {
     }
   }
   
-  
   num_legit_articles <- which(nchar(articlez) == 0)[1]-1
-  
   
   article_df <- data.frame(id=as.character(idz),dt=as.character(unlist(pubdatez)),
                            title=as.character(unlist(titlez)),text=as.character(unlist(articlez))
                            ,stringsAsFactors = FALSE)
   
-  article_df <- article_df[1:num_legit_articles,]
+  article_df    <- article_df[1:num_legit_articles,]
+  article_df$dt <- as.Date(word(article_df$dt,2,4),"%d %b %Y")
   
   article_df
 }
