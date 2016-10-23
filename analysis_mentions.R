@@ -1,3 +1,7 @@
+# scrapes NPR for mentions of candidates in the 2016 presidential election
+# scrapes Huffpost and aggregates polls by week of the election
+# does a Granger test to see if changes in polls => changes in mentions
+
 library(tidyverse,quietly=TRUE)
 library(stringr)
 library(MSBVAR)
@@ -7,7 +11,6 @@ fname     <- word(candidate,1)
 lname     <- word(candidate,2)
 
 text_data       <- get_text_npr(candidate)
-text_data$dt    <- as.Date(word(text_data$dt,2,4),"%d %b %Y")
 text_data$week  <- week_number(text_data$dt)
 
 polls      <- get_polls_huffpost(lname)
