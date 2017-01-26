@@ -13,3 +13,8 @@ week_number <- function(dt,start_year=NULL) {
 week_starting_with <- function(dt) {
   min(dt) + 7*week_number(dt)
 }
+
+# assumes dt is ordered
+week_of <- function(dt) {
+  rep(seq(min(dt),max(dt), 7),7)
+}
